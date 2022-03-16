@@ -1,2 +1,3 @@
 # draft
-draft for project
+한이음 ict 프로젝트
+초안 구상(3/17 ~ 3/25) 
