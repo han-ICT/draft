@@ -1,0 +1,153 @@
+
+<template>
+  <v-app id="inspire">
+    <v-app-bar
+      app
+      clipped-right
+      flat
+      height="72"
+      color = "#1c2331"
+    >
+      <v-spacer></v-spacer>
+    <h3 class="title">[22_HP016] 가시광통신 기술과 GPS 기술을 활용한 실내외 구분없이 작업자의 실시간 위치 추적이 가능한 하이브리드 안전 헬멧</h3>
+    </v-app-bar>
+
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      width="300"
+      color = "#45526e"
+    >
+      <v-navigation-drawer
+        v-model="drawer"
+        absolute
+        color="#2e3951"
+        mini-variant
+      >
+        <v-avatar
+          class="d-block text-center mx-auto mt-4"
+          color="grey darken-1"
+          size="36"
+        ></v-avatar>
+
+        <v-divider class="mx-3 my-5"></v-divider>
+
+        <v-avatar
+          v-for="n in 6"
+          :key="n"
+          class="d-block text-center mx-auto mb-9"
+          color="grey lighten-1"
+          size="28"
+        ></v-avatar>
+      </v-navigation-drawer>
+
+      <v-sheet
+        color="#45526e"
+        height="128"
+        width="100%"
+      ></v-sheet>
+
+      <v-list
+        class="pl-14"
+        shaped
+      >
+        <v-list-item
+          v-for="n in 5"
+          :key="n"
+          link
+        >
+          <v-list-item-content>
+            <v-list-item-title>Item {{ n }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-navigation-drawer
+      app
+      clipped
+      right
+      color = "#2e3951"
+    >
+          
+          
+    사내 메신저(활동 중)
+      <v-list>
+        <v-list-item
+          v-for="n in 5"
+          :key="n"
+          link
+        >
+          <v-list-item-content>
+            <v-list-item-title>Item {{ n }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main 
+    style="background: #7283a7">
+
+    <main_text v-bind:propsdata="employeeList"></main_text>
+
+    <v-flex class="userList" column>
+      <v-card max-width="600" tile>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title> Title </v-list-item-title>
+            <v-list-item-subtitle> content </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </v-flex>
+
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+import axios from "axios";
+import Main_Text from "./components/HelloWorld.vue";
+let url = "http://localhost:8000/location/";
+
+
+
+export default{
+  data: () => {
+    return{
+      employeeList: []
+    };
+  },
+  components: {
+    "main_text": Main_Text,
+  },
+  mounted(){
+    axios({
+      methods: "GET",
+      url: url
+  })
+  .then(response =>{
+    this.employeeList = response.data;
+    console.log(response)
+    console.log(response.data)
+  })
+  .catch(response =>{
+    console.log("Failed", response);
+  });
+},
+methods:{ //CRUD logic
+  getUserList: function(){},
+  updateUserList: function(){},
+  deleteUserList: function(){}
+}
+};
+</script>
+
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+.title {
+    color: white;
+    text-align: right;
+    padding: 10px;
+}
+</style>
